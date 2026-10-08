@@ -9,6 +9,10 @@ DELETE FROM receipt;
 Delete from ;
 
 --จอยทุกตารางรวมกัน
+use petsalonDB;
+go
+
+--จอยทุกตารางรวมกัน
 select 
     e.employee_id,
     e.full_name as employee_name,
