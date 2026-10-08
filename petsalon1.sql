@@ -1,6 +1,23 @@
 -- คำสั่งสร้างตารางดาต้า pet salon ทั้งหมด
-CREATE DATABASE petsalonDB;
-USE petsalonDB;
+use master;
+go
+
+
+if exists (select name from sys.databases where name = N'petsalonDB')
+begin
+    alter database petsalonDB set single_user with rollback immediate;
+    drop database petsalonDB;
+end
+go
+
+create database petsalonDB;
+go
+
+alter database petsalonDB collate Thai_CI_AS;
+go
+use petsalonDB;
+go
+
 create table customer (
     customer_id int primary key identity(1,1),
     full_name nvarchar(100) not null,
