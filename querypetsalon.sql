@@ -8,6 +8,29 @@ SELECT * From
 DELETE FROM receipt;
 Delete from ;
 
+--จอยทุกตารางรวมกัน
+select 
+    e.employee_id,
+    e.full_name as employee_name,
+    a.appointment_id,
+    a.start_time,
+    a.status,
+    p.pet_name,
+    p.species,
+    c.full_name as customer_name,
+    s.service_name,
+    aps.price as service_price,
+    r.receipt_id,
+    r.total_amount,
+    r.payment_method
+from customer c
+inner join pet p on c.customer_id = p.customer_id
+inner join appointment a on p.pet_id = a.pet_id
+inner join appointment_service aps on a.appointment_id = aps.appointment_id
+inner join service s on aps.service_id = s.service_id
+left join receipt r on a.appointment_id = r.appointment_id
+right join Employee e on a.employee_id = e.employee_id;
+
 --รีเซ็ตตัวนับ ID  กลับไปเริ่มนับ 1 กรณีที่คิวไปรอบนึงแล้ว
 DBCC CHECKIDENT ('receipt', RESEED, 0);
 DBCC CHECKIDENT ('-------', RESEED, 0);
